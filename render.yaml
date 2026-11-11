@@ -48,7 +48,7 @@ services:
     runtime: node
     plan: starter
     rootDir: frontend
-    buildCommand: npm install --no-audit --no-fund && npm run build
+    buildCommand: npm ci --include=dev --no-audit --no-fund && npm run build
     startCommand: npm run start -- -H 0.0.0.0 -p $PORT
     healthCheckPath: /
     envVars:
