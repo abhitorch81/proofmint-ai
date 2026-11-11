@@ -22,7 +22,7 @@ if settings.app_env.lower() == 'production':
     if not settings.demo_upload_token:
         raise RuntimeError('Production requires DEMO_UPLOAD_TOKEN')
 app = FastAPI(title='ProofMint AI API', version='0.2.0', docs_url=None if settings.app_env.lower() == 'production' else '/docs', redoc_url=None if settings.app_env.lower() == 'production' else '/redoc')
-app.add_middleware(CORSMiddleware,allow_origins=[v.strip() for v in settings.cors_origins.split(',')],allow_credentials=False,allow_methods=['GET','POST'],allow_headers=['Content-Type'])
+app.add_middleware(CORSMiddleware,allow_origins=[v.strip() for v in settings.cors_origins.split(',')],allow_credentials=False,allow_methods=['GET','POST'],allow_headers=['Content-Type','X-Demo-Upload-Token'])
 
 @app.on_event('startup')
 def init(): Base.metadata.create_all(bind=engine)
