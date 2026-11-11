@@ -1,4 +1,4 @@
-# ProofMint AI Phase 4 — public hackathon sandbox deployment
+# ProofMint AI Phase 4 â€” public hackathon sandbox deployment
 # IMPORTANT: Do not insert secret values into this file.
 # Render dashboard prompts for sync:false settings at Blueprint creation.
 services:
@@ -7,8 +7,8 @@ services:
     runtime: docker
     plan: starter
     rootDir: backend
-    dockerfilePath: ./backend/Dockerfile
-    dockerContext: ./backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     healthCheckPath: /api/health
     disk:
       name: proofmint-media
