@@ -81,6 +81,7 @@ async def video_upload(file:UploadFile=File(...), momentweave_json:UploadFile|No
         video=VideoAsset(id=vid,title=title.strip(),creator=creator.strip(),source_filename=file.filename[:255],
                          source_sha256=sha.hexdigest(),duration_seconds=duration,rights_asserted=True)
         db.add(video)
+        db.flush()  # Insert parent video before child moments
         moments=[]
         for candidate in candidates:
             mid=str(uuid4())
