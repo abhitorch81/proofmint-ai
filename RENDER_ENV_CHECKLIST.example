@@ -1,0 +1,18 @@
+Render Blueprint: proofmint-api (backend)
+APP_ENV=production
+DATABASE_URL=managed by Render fromDatabase (do not fill manually)
+UPLOAD_DIR=/var/data/uploads
+MOMENTWEAVE_EXPORT_DIR=/var/data/momentweave_exports
+MAX_VIDEO_MB=20
+MAX_VIDEO_SECONDS=180
+PAYPAL_BASE_URL=https://api-m.sandbox.paypal.com
+FRONTEND_URL=https://REPLACE-FRONTEND.onrender.com
+CORS_ORIGINS=https://REPLACE-FRONTEND.onrender.com
+PAYPAL_CLIENT_ID=(enter privately in Render)
+PAYPAL_CLIENT_SECRET=(enter privately in Render)
+RECEIPT_SIGNING_SECRET=(generate privately: python -c "import secrets;print(secrets.token_hex(32))")
+DEMO_UPLOAD_TOKEN=(generate privately: python -c "import secrets;print(secrets.token_urlsafe(32))")
+
+Render Blueprint: proofmint-web (frontend)
+NEXT_PUBLIC_API_URL=https://REPLACE-API.onrender.com
+IMPORTANT: NEXT_PUBLIC_API_URL is embedded at BUILD time; redeploy frontend after changes.

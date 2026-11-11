@@ -1,0 +1,64 @@
+# ProofMint AI Phase 4 — public hackathon sandbox deployment
+# IMPORTANT: Do not insert secret values into this file.
+# Render dashboard prompts for sync:false settings at Blueprint creation.
+services:
+  - type: web
+    name: proofmint-api
+    runtime: docker
+    plan: starter
+    rootDir: backend
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /api/health
+    disk:
+      name: proofmint-media
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: proofmint-db
+          property: connectionString
+      - key: UPLOAD_DIR
+        value: /var/data/uploads
+      - key: MOMENTWEAVE_EXPORT_DIR
+        value: /var/data/momentweave_exports
+      - key: MAX_VIDEO_MB
+        value: "20"
+      - key: MAX_VIDEO_SECONDS
+        value: "180"
+      - key: PAYPAL_BASE_URL
+        value: https://api-m.sandbox.paypal.com
+      - key: FRONTEND_URL
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: RECEIPT_SIGNING_SECRET
+        sync: false
+      - key: DEMO_UPLOAD_TOKEN
+        sync: false
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+  - type: web
+    name: proofmint-web
+    runtime: node
+    plan: starter
+    rootDir: frontend
+    buildCommand: npm install --no-audit --no-fund && npm run build
+    startCommand: npm run start -- -H 0.0.0.0 -p $PORT
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        sync: false
+
+databases:
+  - name: proofmint-db
+    plan: basic-256mb
+    databaseName: proofmint
+    user: proofmint

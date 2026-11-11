@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite*
+uploads/
+momentweave_exports/
+.pytest_cache/
+.venv/
+tests/

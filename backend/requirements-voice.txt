@@ -1,0 +1,3 @@
+# Install after requirements.txt; optional for text-only demo
+langgraph>=0.3,<2
+faster-whisper>=1.1,<2
